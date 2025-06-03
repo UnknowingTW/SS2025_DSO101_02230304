@@ -1,44 +1,63 @@
-### This repository is no longer maintained!
+# Practical 4: Jenkins Server for Git Repository
 
-**For the most up to date test app to get you started on Heroku, head on over to [`node-js-getting-started`](https://github.com/heroku/node-js-getting-started).**
+## Jenkins CI/CD Pipeline for Node.js Applications
 
----
+### Aims:
 
-# node-js-sample
+#### The main goal of this initiative is to design and execute a fully functional CI/CD workflow tailored for a Node.js project, utilizing Jenkins as the automation server. This hands-on task focused on:
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+- Installing and configuring Jenkins to serve as the foundation for continuous integration and deployment.
 
-## Running Locally
+- Developing a Node.js application that incorporates automated testing mechanisms.
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
+- Creating a Jenkins pipeline capable of detecting code changes and triggering a sequence of build, test, and deployment processes automatically.
 
-```sh
-git clone git@github.com:heroku/node-js-sample.git # or clone your own fork
-cd node-js-sample
-npm install
-npm start
-```
+### Proceduers followed:
+ i. Install plugins needed
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+![alt text](images/1.png)
 
-## Deploying to Heroku
+ ii. Node.js Tool Configuration
 
-```
-heroku create
-git push heroku master
-heroku open
-```
+ ![alt text](images/2.png)
+ 
+iii. Created Node.js Application
 
-Alternatively, you can deploy your own copy of the app using the web-based flow:
+![alt text](images/3.png)
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+ iV. Create jenkins pipeline job
 
-## Documentation
+![alt text](images/4.png)
 
-For more information about using Node.js on Heroku, see these Dev Center articles:
+v. Configured Jenkins to load the pipeline script directly from SCM
 
-- [10 Habits of a Happy Node Hacker](https://blog.heroku.com/archives/2014/3/11/node-habits)
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+![alt text](images/5.png)
+
+vi. Set up a Jenkinsfile to orchestrate a multi-phase CI/CD pipeline:
+
+Source Checkout: Pulled application code from the configured Git repository via SCM.
+
+Dependency Installation: Installed required Node.js modules using npm install.
+
+Test Execution: Ran automated tests with coverage analysis to ensure code quality.
+
+Build Phase: Compiled and prepared the application for deployment.
+
+Artifact Archiving: Saved build artifacts for future use or reference.
+
+Deployment Step: Simulated deployment to a staging environment for validation.
+
+vii. Run pipeline in jenkins
+
+![alt text](images/6.png)
+
+## Problems faced & there Solutions:
+    Jenkinsfile Not Found or Pipeline Fails to Load
+
+Problem: Jenkins failed to locate the Jenkinsfile in the SCM repo, resulting in pipeline errors.
+
+Solution:Had to ensure the Jenkinsfile is committed at the root of the repository and
+confirm the branch name and script path are correctly defined in the pipeline job config.
+
+## Conclusion
+This practical demonstrates how Jenkins can be configured to automate building, testing, and deploying a Node.js application through pipelines, facilitating continuous integration and delivery with automated test reporting for quicker and more dependable software releases.
